@@ -2,13 +2,12 @@ const User = require('../models/user');
 
 module.exports.profile = function(req, res){
 
-    if(req.isAuthenticated()){
+    User.findById(req.params.id, function(err, user){
         return res.render('user_profile.ejs',{
             title: "Codeial | User's Profile",
+            profile_user : user
         });
-    }
-
-    return res.redirect('/users/sign-in');
+    });
 }
 
     
