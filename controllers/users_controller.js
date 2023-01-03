@@ -1,11 +1,25 @@
 const User = require('../models/user');
 
 module.exports.profile = function(req, res){
-    res.render('profile.ejs');
+
+    if(req.isAuthenticated()){
+        return res.render('user_profile.ejs',{
+            title: "Codeial | User's Profile",
+        });
+    }
+
+    return res.redirect('/users/sign-in');
 }
+
+    
 
 //render the sign up page
 module.exports.signUp = function(req, res){
+
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+
     return res.render('user_sign_up.ejs',{
         title: 'Codeial | Sign Up'
     });
@@ -13,6 +27,11 @@ module.exports.signUp = function(req, res){
 
 //render the sign in page
 module.exports.signIn = function(req, res){
+
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+
     return res.render('user_sign_in.ejs',{
         title: 'Codeial | Sign In'
     });
@@ -46,5 +65,17 @@ module.exports.create = function(req, res){
 
 //create sign in session for the user
 module.exports.createSession = function(req, res){
+    return res.redirect('/');
+}
+
+//sign out action
+module.exports.destroySession = function(req, res){
+
+    //this function is provided by passport.js
+    req.logout(function(err) {
+        if (err) { 
+            console.log('Error in logout --> Passport'); }
+      });
+
     return res.redirect('/');
 }

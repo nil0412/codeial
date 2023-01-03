@@ -2,23 +2,32 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
 const port = 8000;
-
-app.use(express.urlencoded());
-
-app.use(cookieParser());
-
 const expressLayouts = require('express-ejs-layouts');
-app.use(expressLayouts);
-
-const db = require('./config/mongoose');    
+const db = require('./config/mongoose');
 
 //used for session cookie and authentication passport 
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-const { Cookie } = require('express-session');
+const MongoStore = require('connect-mongo');
+
+const sassMiddleware = require('node-sass-middleware')
+
+app.use(sassMiddleware({
+    src: './assets/scss',
+    dest: './assets/css',
+    debug: true,
+    outputStyle: 'extended',
+    prefix: '/css'
+}));
+
+app.use(express.urlencoded());
+
+app.use(cookieParser());
 
 app.use(express.static('assets'));
+
+app.use(expressLayouts);
 
 //extract styles and scripts from sub pages to the layout
 app.set('layout extractStyles', true);
@@ -28,6 +37,7 @@ app.set('layout extractScripts', true);
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+//mongo store is used to store the session cookie in the db
 //takes the cookie and encrypts it
 app.use(session({
     name: 'codeial',
@@ -38,7 +48,16 @@ app.use(session({
     resave: false,
     cookie: {
         maxAge: (1000 * 60 * 100)
-    }
+    },
+    //setting mongo store
+    store: MongoStore.create({
+        mongoUrl: 'mongodb://localhost/cosial_db',
+        autoRemove: 'disabled'
+      },
+        function(err){
+            console.log(err || 'connect mongoDB setup ok');
+        }  
+    )  
 }));
 
 app.use(passport.initialize());
