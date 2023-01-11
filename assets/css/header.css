@@ -1,0 +1,27 @@
+header {
+  margin: 0;
+  padding: 5px;
+  background-color: mediumblue;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
+  header a {
+    color: white;
+    text-decoration: none; }
+  header a:hover {
+    color: YELLOW; }
+  header ul {
+    margin: 0;
+    margin-right: 5px;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    header ul li {
+      padding-left: 10px;
+      font-size: 0.5em;
+      font-weight: 500; }
