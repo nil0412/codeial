@@ -89,7 +89,7 @@ module.exports.destroySession = function(req, res){
       });
 
     //flash meaage on sign-out
-    req.flash('success', 'You are logged out!');
+    req.flash('success', 'You are logged out');
 
     return res.redirect('/');
 }
