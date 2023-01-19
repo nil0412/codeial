@@ -77,6 +77,8 @@ app.use(customMware.setFlash);
 //use express router
 app.use('/', require('./routes/index'));
 
+//make the uploads path available to the browser 
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 app.listen(port, function(err){
     if(err){    
