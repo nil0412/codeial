@@ -1,27 +1,20 @@
-header {
-  margin: 0;
-  padding: 5px;
-  background-color: mediumblue;
-  color: white;
-  font-weight: bold;
-  font-size: 3em;
+#layout-header nav {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: center; }
-  header a {
+  padding: 0 10px;
+  background: #2196f3;
+  color: white;
+  box-shadow: 1px 1px 1px 1px lightgrey; }
+  #layout-header nav .mini-logo p {
+    margin: 5px;
+    font-size: 1.4rem;
+    font-weight: bold; }
+  #layout-header nav .auth-links ul {
+    margin: 5% 5px;
+    display: flex;
+    list-style: none; }
+    #layout-header nav .auth-links ul li {
+      margin-right: 10px; }
+  #layout-header nav a {
     color: white;
     text-decoration: none; }
-  header a:hover {
-    color: YELLOW; }
-  header ul {
-    margin: 0;
-    margin-right: 5px;
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center; }
-    header ul li {
-      padding-left: 10px;
-      font-size: 0.5em;
-      font-weight: 500; }
