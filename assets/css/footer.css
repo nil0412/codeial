@@ -1,9 +1,13 @@
 #layout-footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
   color: white;
   background: grey;
-  padding: 5px 10px;
   display: flex;
   justify-content: flex-start; }
+  #layout-footer div {
+    padding: 5px 10px; }
   #layout-footer a {
     color: white;
     text-decoration: none; }

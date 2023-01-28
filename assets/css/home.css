@@ -1,10 +1,18 @@
 #home-container {
-  display: flex; }
+  display: flex;
+  margin-top: 1%;
+  margin-bottom: 1%; }
+  #home-container #profile-left {
+    width: 25%;
+    border-right: 1px solid lightgrey; }
   #home-container #feed-posts {
-    width: 70%;
+    width: 50%;
+    padding: 10px; }
+  #home-container #right {
+    width: 25%;
+    border-left: 1px solid lightgrey;
     padding: 10px; }
   #home-container #user-friends {
-    width: 30%;
-    padding: 10px;
-    border-left: 1px solid lightgrey;
-    height: 100%; }
+    border-bottom: 1px solid lightgrey;
+    height: 30vh;
+    overflow-y: scroll; }

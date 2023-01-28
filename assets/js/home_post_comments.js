@@ -4,6 +4,7 @@
 // 1. When the page loads
 // 2. Creation of every post dynamically via AJAX
 
+
 class PostComments{
     // constructor is used to initialize the instance of the class whenever a new instance is created
     constructor(postId){
@@ -19,7 +20,6 @@ class PostComments{
             self.deleteComment($(this));
         });
     }
-
 
     createComment(postId){
         let pSelf = this;
@@ -56,7 +56,6 @@ class PostComments{
         });
     }
 
-    let userName = ${comment.user.name};
 
     newCommentDom(comment){
         // CHANGE :: show the count of zero likes on this comment
@@ -71,7 +70,7 @@ class PostComments{
                             ${comment.content}
                             <br>
                             <small>
-                                ${userName}
+                                ${comment.user.name}
                             </small>
                             <small>
                             
@@ -90,7 +89,6 @@ class PostComments{
     deleteComment(deleteLink){
         $(deleteLink).click(function(e){
             e.preventDefault();
-
             $.ajax({
                 type: 'get',
                 url: $(deleteLink).prop('href'),

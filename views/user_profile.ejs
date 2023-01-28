@@ -20,7 +20,18 @@
     <!-- else show only the profile info -->
     <p><%= profile_user.name %></p>
     <p><%= profile_user.email %></p>
+    <a class="friendship-add-button" href="/friendship/add/<%= profile_user.id %>"">Add Friend</a>
+    <a class="friendship-add-remove" href="/friendship/remove/<%= profile_user.id %>"">Remove Friend</a
 <%} %>
+
+<script src="/js/friendship.js"></script>
+
+<script>
+  $('.friendship-add-button').each(function(){
+      let self = this;
+      let toggleLike = new ToggleLike(self);
+  });
+</script>
 
 <script>
   var loadFile = function(event) {

@@ -2,9 +2,6 @@ const User = require('../models/user');
 const fs = require('fs');
 const path = require('path');
 
-const ForgotPassword = require('../models/forgot_password');
-
-const forgotPasswordMailer = require('../mailers/forgot_password_mailer');
 
 // let's keep it same as before
 module.exports.profile = function(req, res){
@@ -139,32 +136,3 @@ module.exports.destroySession = function(req, res){
     return res.redirect('/');
 }
 
-// render the forgot-password page
-module.exports.forgotPassword = function(req, res){
-
-    if (req.isAuthenticated()){
-        // return res.redirect('/users/profile');
-    }
-    else{
-        res.render('forgot_password', {
-            title: "Codeial | Forgot PAssword"
-        });
-
-        // forgotPasswordMailer.forgotPassword();
-    }
-}
-
-//forgot password link sender
-module.exports.forgotPasswordLinkSend = function(req, res){
-    console.log(req.body);
-    if (req.isAuthenticated()){
-        // return res.redirect('/users/profile');
-    }
-    else{
-        if(req.body.email){
-            let email = req.body.email;
-            console.log(email);
-            forgotPasswordMailer.forgotPassword(email);
-        }
-    }
-}

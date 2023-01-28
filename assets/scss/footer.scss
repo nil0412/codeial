@@ -1,14 +1,21 @@
 #layout-footer{
+
+    width: 100%;
+    position: absolute;
+    bottom: 0;
     color: white;
+    background: grey;
+    display: flex;
+    justify-content: flex-start;
+
+    div{
+        padding: 5px 10px;
+    }
+
     a{
         color: white;
         text-decoration: none;
     }
-
-    background: grey;
-    padding: 5px 10px;
-    display: flex;
-    justify-content: flex-start;
 
     .footer-nav{
         ul{

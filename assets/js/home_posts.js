@@ -38,7 +38,7 @@
     }
 
 
-    let userName = ${post.user.name};
+    
 
     // method to create a post in DOM
     let newPostDom = function(post){
@@ -53,7 +53,7 @@
                         ${ post.content }
                         <br>
                         <small>
-                        ${ userName }
+                        ${ post.userName }
                         </small>
                         <br>
                         <small>

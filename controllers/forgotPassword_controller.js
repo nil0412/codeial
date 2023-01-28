@@ -1,33 +1,51 @@
 const express = require('express');
 const app = express();
 
+const User = require('../models/user');
 app.use(express.urlencoded());
 
+const ForgotPassword = require('../models/forgot_password');
+const crypto = require('crypto');
+const nodemailer = require('../config/nodemailer');
+const forgotPasswordMailer = require('../mailers/forgot_password_mailer');
+
+// render the forgot-password page
 module.exports.forgotPassword = function(req, res){
-    console.log(req.query);
+
+    return res.render('forgot_password', {
+            title: "Codeial | Forgot Password"
+    });
 }
-module.exports.create = async function(req, res){
-    try{
-        let post = await Post.create({
-            content: req.body.content,
-            user: req.user._id
-        });
-        
-        if (req.xhr){
-            return res.status(200).json({
-                data: {
-                    post: post
-                },
-                message: "Post created!"
-            });
+
+
+//forgot password link sender
+module.exports.forgotPasswordLinkSend = function(req, res){
+    const email = req.body.email;
+    User.findOne({ email: email }, function(err, user) {
+        if (err) {
+            console.log(err);
         }
+        if (!user) {
+            res.json({ success: false, message: 'No account with that email address exists.' });
+        } else {
+            // create reset token
+            const resetToken = crypto.randomBytes(20).toString('hex');
+            // set reset token and expiry
+            user.resetPasswordToken = resetToken;
+            user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+            user.save(function(err) {
+                if (err) {
+                    console.log(err);
+                }
+                // send email with reset token
+                forgotPasswordMailer.forgotPasswordLink(user);
+            });
 
-        req.flash('success', 'Post published!');
-        return res.redirect('back');
-
-    }catch(err){
-        req.flash('error', err);
-        return res.redirect('back');
-    }
-  
+        }
+        
+        return res.render('user_sign_in', {
+            title: "Codeial | Sign In"
+        })
+        
+    });
 }

@@ -47,14 +47,12 @@ module.exports.toggleLike = async function(req, res){
 
         }
 
-        // res.json(200, {
-        //     message: "Request successful!",
-        //     data: {
-        //         deleted: deleted
-        //     }
-        // });
-
-        return res.redirect('back');
+        return res.json(200, {
+            message: "Request successful!",
+            data: {
+                deleted: deleted
+            }
+        })
 
 
 
