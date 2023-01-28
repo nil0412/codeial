@@ -6,46 +6,25 @@ module.exports.add = async function(req, res){
         let to_user = await User.findById(req.params.id);
         let from_user = await User.findById(req.user.id);
 
-        let isFriend = false;
+        let user_friendship_to = await User.findById(to_user).populate('friendship');
+        let user_friendship_from = await User.findById(from_user).populate('friendship');
 
-        let user_friendship = await User.findById(from_user).populate('friendship');
-        
-        let existingFriendship_1 = await Friendship.findOne({
+        let newFriendship = await Friendship.create({
             from_user: from_user,
             to_user: to_user
         });
 
-        let existingFriendship_2 = await Friendship.findOne({
-            from_user: to_user,
-            to_user: from_user
-        });
+        // user_friendship_to.friendship.push(newFriendship);
+        user_friendship_to.friendship.push(from_user);
+        user_friendship_to.save();
 
-        if(!(existingFriendship_1 || existingFriendship_2)){
-            let newFriendship = await Friendship.create({
-                from_user: from_user,
-                to_user: to_user
-            });
+        // user_friendship_from.friendship.push(newFriendship);
+        user_friendship_from.friendship.push(to_user);
+        user_friendship_from.save();
 
-            user_friendship.friendship.push(newFriendship);
-            user_friendship.save();
+        req.flash('success', 'Friend Added!');
 
-            isFriend = true;
-
-            req.flash('success', 'Friend Added!');
-        }
-
-    //     return res.redirect('back');
-
-    // }catch(err){
-    //     req.flash('error', err);
-    //     return res.redirect('back');
-    // }
-        return res.json(200, {
-            message: "Request successful!",
-            data: {
-                isFriend: isFriend
-            }
-        });
+        return res.redirect('back');
 
     }catch(err){
         console.log(err);
@@ -58,20 +37,48 @@ module.exports.add = async function(req, res){
 module.exports.remove = async function(req, res){
     console.log("In the friendship controller");
     try{
-        console.log("In the friendship controller");
         let to_user = await User.findById(req.params.id);
         let from_user = await User.findById(req.user.id);
-        let friendship_remove = await Friendship.create({
+
+        let user_friendship_to = await User.findById(to_user).populate('friendship');
+        let user_friendship_from = await User.findById(from_user).populate('friendship');
+        
+        let existingFriendship_1 = await Friendship.findOne({
             from_user: from_user,
             to_user: to_user
         });
+
+        if(existingFriendship_1){
+            // user_friendship_to.friendship.pull(existingFriendship_1);
+            user_friendship_to.friendship.pull(from_user);
+            user_friendship_to.save();
+
+            // user_friendship_from.friendship.pull(existingFriendship_1);
+            user_friendship_from.friendship.pull(to_user);
+            user_friendship_from.save();
+
+            existingFriendship_1.remove();
+        }else{
+            let existingFriendship_2 = await Friendship.findOne({
+                from_user: to_user,
+                to_user: from_user
+            });
+
+            user_friendship_to.friendship.pull(existingFriendship_2);
+            user_friendship_to.save();
+
+            user_friendship_from.friendship.pull(existingFriendship_2);
+            user_friendship_from.save();
+
+            existingFriendship_2.remove();
+        }
 
         req.flash('success', 'Friend Removed');
         return res.redirect('back');
 
     }catch(err){
         console.log("In the friendship controller", err);
-        req.flash('error', err);
+        req.flash('error', "Error in removing friend");
         return res.redirect('back');
     }
 }

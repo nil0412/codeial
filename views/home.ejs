@@ -29,20 +29,18 @@
         <section id="right">
             <section id="user-friends">
                 <h4>Friends</h4>
-                <% for(u of all_users){%>
-                    <p>
-                        <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
-                        <% if(locals.user){ %>
-                            <% if(u.id !== locals.user.id) { %>
-                                <a class="friendship-add-remove" href="/friendship/remove/<%= u.id %>""> X </a
-                            <% } %>
-                        <% } %>
-                    </p>
+                <% if(locals.user){ %>
+                    <% for(friend of locals.user.friendship){%>
+                        <p>
+                            <a href="/users/profile/<%= friend %>"><%= all_users.find(obj => obj.id == friend).name %></a>
+                            <a class="friendship-add-remove" href="/friendship/remove/<%= friend %>""> X </a>
+                        </p>
+                    <% } %>
                 <% } %>
             </section>
     
             <section id="all-users">
-                <h4>Users</h4>
+                <h4>All Users</h4>
                 <% for(u of all_users){%>
                     <p>
                         <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
@@ -53,7 +51,7 @@
         
 </div>
 
-importing this script for creating the comments -->
+<!-- importing this script for creating the comments  -->
 <script src="/js/home_post_comments.js" ></script>
 <script src="/js/home_posts.js"></script>
 

@@ -3,6 +3,6 @@ const router = express.Router();
 const frienshipController = require('../controllers/friendship_controller');
 
 router.get('/add/:id', frienshipController.add);
-router.post('/remove/:id', frienshipController.remove);
+router.get('/remove/:id', frienshipController.remove);
 
 module.exports = router;

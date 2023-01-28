@@ -1,17 +1,59 @@
 const User = require('../models/user');
+const Friendship = require('../models/friendship');
 const fs = require('fs');
 const path = require('path');
 
 
 // let's keep it same as before
-module.exports.profile = function(req, res){
-    User.findById(req.params.id, function(err, user){
-        return res.render('user_profile', {
-            title: 'User Profile',
-            profile_user: user
-        });
-    });
+// module.exports.profile = function(req, res){
+//     User.findById(req.params.id, function(err, user){
+//         return res.render('user_profile', {
+//             title: 'User Profile',
+//             profile_user: user
+//         });
+//     });
 
+// }
+
+// let's keep it same as before
+module.exports.profile = function(req, res){
+    User.findById(req.params.id, async function(err, user){
+        try{
+            let to_user = await User.findById(req.params.id);
+            let from_user = await User.findById(req.user.id);
+
+            let isFriend = false;
+            
+            let existingFriendship_1 = await Friendship.findOne({
+                from_user: from_user,
+                to_user: to_user
+            });
+
+            let existingFriendship_2 = await Friendship.findOne({
+                from_user: to_user,
+                to_user: from_user
+            });
+
+            if(existingFriendship_1 || existingFriendship_2){
+                isFriend = true;
+            }
+            if(isFriend){
+                return res.render('user_profile_remove', {
+                    title: 'User Profile',
+                    profile_user: user
+                });
+            }
+            else{
+                return res.render('user_profile_add', {
+                    title: 'User Profile',
+                    profile_user: user
+                });
+            }
+        }catch(err){
+            console.log(err);
+            return res.redirect('back');
+        }
+    });
 }
 
 
