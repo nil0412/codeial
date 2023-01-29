@@ -25,4 +25,23 @@
         height: 30vh;
         overflow-y: scroll;
     }
+
+    #friend{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        // justify-content: space-between;
+    }
+    #user{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    #friend:nth-child(2n), #user:nth-child(2n){
+        background-color: lightblue;
+    }
+
+    .friend-user{
+        padding: 0 10px;
+    }
 }

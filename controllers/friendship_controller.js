@@ -64,10 +64,10 @@ module.exports.remove = async function(req, res){
                 to_user: from_user
             });
 
-            user_friendship_to.friendship.pull(existingFriendship_2);
+            user_friendship_to.friendship.pull(from_user);
             user_friendship_to.save();
 
-            user_friendship_from.friendship.pull(existingFriendship_2);
+            user_friendship_from.friendship.pull(to_user);
             user_friendship_from.save();
 
             existingFriendship_2.remove();

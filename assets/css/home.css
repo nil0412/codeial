@@ -16,3 +16,15 @@
     border-bottom: 1px solid lightgrey;
     height: 30vh;
     overflow-y: scroll; }
+  #home-container #friend {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+  #home-container #user {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+  #home-container #friend:nth-child(2n), #home-container #user:nth-child(2n) {
+    background-color: lightblue; }
+  #home-container .friend-user {
+    padding: 0 10px; }

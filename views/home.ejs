@@ -33,10 +33,11 @@
                 <h4>Friends</h4>
                 <% if(locals.user){ %>
                     <% for(friend of locals.user.friendship){%>
-                        <p>
-                            <a href="/users/profile/<%= friend %>"><%= all_users.find(obj => obj.id == friend).name %></a>
+                        <div id="friend">
+                            <a href="/users/profile/<%= friend %>"><img src="<%= all_users.find(obj => obj.id == friend).avatar %>" alt="avatar" width="50" height="50"></a>
+                            <a href="/users/profile/<%= friend %>" class="friend-user"><%= all_users.find(obj => obj.id == friend).name %></a>
                             <a class="friendship-add-remove" href="/friendship/remove/<%= friend %>""> X </a>
-                        </p>
+                        </div>
                     <% } %>
                 <% } %>
             </section>
@@ -44,9 +45,10 @@
             <section id="all-users">
                 <h4>All Users</h4>
                 <% for(u of all_users){%>
-                    <p>
-                        <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
-                    </p>
+                    <div id="user">
+                        <a href="/users/profile/<%= u.id %>"><img src="<%= u    .avatar %>" alt="avatar" width="50" height="50"></a>
+                        <a href="/users/profile/<%= u.id %>" class="friend-user"><%= u.name %></a>
+                    </div>
                 <% } %>
             </section>
         </section>

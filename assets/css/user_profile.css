@@ -1,2 +1,18 @@
 body {
   background-color: lightblue; }
+  body a.friendship-button {
+    font-weight: bold;
+    border-radius: 10px;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block; }
+  body a.friendship-remove-button:link, body a.friendship-remove-button:visited {
+    background-color: #f44336; }
+  body a.friendship-remove-button:hover, body a.friendship-remove-button:active {
+    background-color: red; }
+  body a.friendship-add-button:link, body a.friendship-add-button:visited {
+    background-color: #075f0e; }
+  body a.friendship-add-button:hover, body a.friendship-add-button:active {
+    background-color: green; }
