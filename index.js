@@ -37,7 +37,7 @@ const path = require('path');
 if(env.name == 'development'){
     app.use(sassMiddleware({
         src: path.join(__dirname, env.asset_path, 'scss'),
-        dest: path.join(__dirname, env.asset_path, 'css'),
+        dest: path.join(__dirname, env.asset_path, 'css'),  
         debug: true,
         outputStyle: 'extended',
         prefix: '/css'
@@ -101,7 +101,6 @@ app.use('/', require('./routes/index'));
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
 app.use(logger(env.morgan.mode, env.morgan.options));
-
 app.listen(port, function(err){
     if(err){    
         console.log(`Error ${err}`);
