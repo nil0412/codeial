@@ -20,8 +20,8 @@ passport.use(new googleStrategy({
                 return;
             }
 
-            console.log(accessToken, refreshToken);
-            console.log(profile);
+            // console.log(accessToken, refreshToken);
+            // console.log(profile);
 
             if(user){
                 //if found, set this as req.user
