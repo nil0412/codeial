@@ -1,8 +1,0 @@
-body {
-  margin: 0;
-  /* text-align: center; */ }
-  body #layout-main {
-    margin: 50px 10px;
-    height: 90%;
-    overflow: scroll;
-    overflow-x: hidden; }
