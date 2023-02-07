@@ -1,4 +1,5 @@
 const nodeMailer = require('../config/nodemailer');
+const env = require('../config/enviroment');
 
 // this is another way of exporting a method
 exports.newComment = (comment) => {
@@ -6,7 +7,8 @@ exports.newComment = (comment) => {
     let htmlString = nodeMailer.renderTemplate({comment: comment}, '/comments/new_comment.ejs');
 
     nodeMailer.transporter.sendMail({
-        from: 'felipe.wiegand60@ethereal.email',
+        // from: 'felipe.wiegand60@ethereal.email',
+        from: env.smtp.auth.user,
     //    from: 'mailer.codeial@gmail.com',
     //    from: 'donotreply.codeial@gmail.com',
        to: comment.user.email,

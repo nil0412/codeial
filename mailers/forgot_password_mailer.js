@@ -1,4 +1,5 @@
 const nodeMailer = require('../config/nodemailer');
+const env = require('../config/enviroment');
 
 // this is another way of exporting a method
 exports.forgotPasswordLink = (user) => {
@@ -8,7 +9,8 @@ exports.forgotPasswordLink = (user) => {
     nodeMailer.transporter.sendMail({
     //    from: 'donotreply.codeial@gmail.com',
     //    from: 'mailer.codeial@gmail.com',
-        from: 'felipe.wiegand60@ethereal.email',
+        // from: 'antonette.stanton@ethereal.email',
+        from: env.smtp.auth.user,
        to: user.email,
     //    to: 'nil041297@gmail.com',   
        subject: "Password Reset Link",

@@ -21,12 +21,15 @@ const development = {
     db: 'codeial_development',
     
     smtp: {
-        host: 'smtp.ethereal.email',
-        port: 587,
-        secure: false, // true for 465, false for other ports
+        // host: 'smtp.ethereal.email',
+        // port: 587,
+        service: 'gmail',
+        // secure: false, // true for 465, false for other ports
         auth: {
-          user: 'felipe.wiegand60@ethereal.email',
-          pass: 'bH6nhtWRY8W9k24p7w'
+          user: "mailer.codeial@gmail.com",
+          pass: "izqmjvwmayfuyuet"
+          // user: 'antonette.stanton@ethereal.email',
+          // pass: 'Sg4hC2pS1GET5DSfs5'
         }
     },
     
@@ -52,12 +55,15 @@ const production = {
     db: process.env.CODEIAL_DB,
     
     smtp: {
-        host: 'smtp.ethereal.email',
-        port: 587,
-        secure: false, // true for 465, false for other ports
+        // host: 'smtp.ethereal.email',
+        // port: 587,
+        service: 'gmail',
+        // secure: false, // true for 465, false for other ports
         auth: {
-          user: 'felipe.wiegand60@ethereal.email',
-          pass: 'bH6nhtWRY8W9k24p7w'
+          user: "mailer.codeial@gmail.com",
+          pass: "izqmjvwmayfuyuet"
+          // user: 'antonette.stanton@ethereal.email',
+          // pass: 'Sg4hC2pS1GET5DSfs5'
         }
     },
     
