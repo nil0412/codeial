@@ -1,11 +1,11 @@
 
 module.exports.chatSockets = function(socketServer){
     let io = require('socket.io')(socketServer, {
-        // cors: {
+        cors: {
         //   origin: "http://localhost:8000",
-        // //   origin: "http://100.25.143.16:8000",
-        //   methods: ["GET", "POST"]
-        // }
+          origin: "http://100.25.143.16:8000",
+          methods: ["GET", "POST"]
+        }
       });
 
     io.sockets.on('connection', function(socket){

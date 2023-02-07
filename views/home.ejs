@@ -84,6 +84,7 @@
 
 <% if(locals.user){ %>
     <script>
+        console.log("heyy************");
         new ChatEngine('user-chat-box', '<%= locals.user.email %>');
     </script>
 <% } %>
